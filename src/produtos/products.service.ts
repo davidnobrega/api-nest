@@ -1,12 +1,25 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Model } from 'mongoose';
+import { Repository } from 'typeorm';
 import { ProductModel } from './produtos.model';
 
 const BASE_URL = 'https://api.awsli.com.br';
 
 @Injectable()
 export class ProductsService {
-  constructor(private readonly httpService: HttpService) {}
+  public get httpService(): HttpService {
+    return this._httpService;
+  }
+  constructor(
+    @InjectRepository(ProductModel)
+    private productRepository: Repository<ProductModel>,
+    private readonly _httpService: HttpService,
+    @InjectModel(ProductModel.name)
+    private productModel: Model<ProductModel>,
+  ) {}
 
   async getAll(): Promise<ProductModel> {
     const { data } = await this.httpService.axiosRef.get(
@@ -50,7 +63,9 @@ export class ProductsService {
       },
     );
 
-    return data;
+    const createProductSQL = this.productRepository.save(data);
+    const createProduct = new this.productModel(data);
+    return createProduct.save(), createProductSQL;
   }
 
   async putProduct(body: any, idProduct: number): Promise<ProductModel> {
