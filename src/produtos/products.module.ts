@@ -21,6 +21,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     MongooseModule.forFeature([
       { name: ProductModel.name, schema: ProductSchema },
     ]),
+
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3307,
+      username: 'root',
+      password: '',
+      database: 'allblack',
+      entities: [ProductModel],
+      synchronize: true,
+    }),
+
     TypeOrmModule.forFeature([ProductModel]),
   ],
 
