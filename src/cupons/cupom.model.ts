@@ -1,13 +1,17 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 import { Document } from 'mongoose';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 export type CuponsDocument = CuponsModel & Document;
 
-@Entity()
+@Entity('coupons')
 @Schema()
 export class CuponsModel {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('increment')
+  id: number;
+
+  @Column()
   @Prop()
   codigo: string;
 
@@ -33,10 +37,11 @@ export class CuponsModel {
 
   @Prop()
   @Column()
+  @IsNotEmpty()
   descricao: string;
 
   @Prop()
-  @Column()
+  @Column({ nullable: true })
   id_externo: string;
 
   @Prop()
@@ -44,11 +49,11 @@ export class CuponsModel {
   quantidade: number;
 
   @Prop()
-  @Column()
+  @Column({ nullable: true })
   quantidade_por_cliente: number;
 
   @Prop()
-  @Column()
+  @Column({ nullable: true })
   quantidade_usada: number;
 
   @Prop()
@@ -56,7 +61,7 @@ export class CuponsModel {
   tipo: string;
 
   @Prop()
-  @Column()
+  @Column({ nullable: true })
   validade: Date;
 
   @Prop()
@@ -64,7 +69,7 @@ export class CuponsModel {
   valor: number;
 
   @Prop()
-  @Column()
+  @Column({ nullable: true })
   valor_minimo: number;
 }
 

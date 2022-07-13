@@ -17,7 +17,7 @@ export class CuponsController {
   }
 
   @Post()
-  criar(@Body() body) {
+  criar(@Body() body: CuponsModel) {
     return this.cuponsService.postCupons(body);
   }
 

@@ -52,25 +52,23 @@ export class CuponsService {
         ...body,
       });
 
-      // TODO Verificar por que o HASH do mongo não é aceito
+      // Primeiro salva no nosso banco de dados
+      const cupom = await this.cuponsRepository.save(body);
       const lojaIntegradaBody = {
-        //  id_externo: _id.toHexString(),
+        id_externo: cupom.id,
         ...body,
       };
 
-      console.log(lojaIntegradaBody);
+      const { data } = await firstValueFrom(
+        this.httpService.post(`${BASE_URL}/v1/cupom/`, lojaIntegradaBody, {
+          headers: {
+            Authorization:
+              'chave_api 146c5d3f1fe4a19ad46d aplicacao bb53fd2d-7e5c-407e-b4d7-fea32603697f',
+          },
+        }),
+      );
 
-      // const { data } = await firstValueFrom(
-      //   this.httpService.post(`${BASE_URL}/v1/cupom/`, lojaIntegradaBody, {
-      //     headers: {
-      //       Authorization:
-      //         'chave_api 146c5d3f1fe4a19ad46d aplicacao bb53fd2d-7e5c-407e-b4d7-fea32603697f',
-      //     },
-      //   }),
-      // );
-
-      const createCupomSQL = this.cuponsRepository.save(body);
-      return createCupomSQL;
+      return data;
     } catch (err) {
       console.log(err);
     }
