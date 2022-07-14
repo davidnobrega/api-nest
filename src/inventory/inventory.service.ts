@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
-import { InventoryModel } from './inventory.model';
+import { InventoryModel } from '../models/inventory.model';
 
 const BASE_URL = 'https://api.awsli.com.br';
 

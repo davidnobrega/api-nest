@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { firstValueFrom } from 'rxjs';
-import { CuponsModel, CuponsDocument } from './cupom.model';
+import { CuponsModel, CuponsDocument } from '../models/cupom.model';
 import { Model } from 'mongoose';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

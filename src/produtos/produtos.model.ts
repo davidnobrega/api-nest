@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity()
+@Entity('products')
 @Schema()
 export class ProductModel {
   @Prop()

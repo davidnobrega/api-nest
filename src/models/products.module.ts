@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
-import { ProdutosController } from './produtos.controller';
+import { ProdutosController } from '../produtos/produtos.controller';
 import { HttpModule } from '@nestjs/axios';
-import { ProductsService } from './products.service';
+import { ProductsService } from '../produtos/products.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProductModel, ProductSchema } from './produtos.model';
+import { ProductModel, ProductSchema } from '../produtos/produtos.model';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([ProductModel]),
     HttpModule.register({
       timeout: 5000,
       maxRedirects: 5,
@@ -21,19 +22,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     MongooseModule.forFeature([
       { name: ProductModel.name, schema: ProductSchema },
     ]),
-
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3307,
-      username: 'root',
-      password: '',
-      database: 'allblack',
-      entities: [ProductModel],
-      synchronize: true,
-    }),
-
-    TypeOrmModule.forFeature([ProductModel]),
   ],
 
   controllers: [ProdutosController],

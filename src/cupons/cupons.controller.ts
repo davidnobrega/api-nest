@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { CuponsModel } from './cupom.model';
+import { CuponsDto } from '../dto/cupom.dto';
+import { CuponsModel } from '../models/cupom.model';
 import { CuponsService } from './cupons.service';
 
 @Controller('cupons')
@@ -17,7 +18,7 @@ export class CuponsController {
   }
 
   @Post()
-  criar(@Body() body: CuponsModel) {
+  criar(@Body() body: CuponsDto) {
     return this.cuponsService.postCupons(body);
   }
 

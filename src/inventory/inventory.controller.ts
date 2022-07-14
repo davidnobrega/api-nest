@@ -1,6 +1,6 @@
 import { Controller, Get, Body, Param, Put } from '@nestjs/common';
 import { InventoryService } from './inventory.service';
-import { InventoryModel } from './inventory.model';
+import { InventoryModel } from '../models/inventory.model';
 
 @Controller('inventory')
 export class InventoryController {

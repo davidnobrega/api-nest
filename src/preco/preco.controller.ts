@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Put } from "@nestjs/common";
 import { PrecoService } from './preco.service';
-import { PrecoModel } from './preco.model';
+import { PrecoModel } from '../models/preco.model';
 
 @Controller('preco')
 export class PrecoController {

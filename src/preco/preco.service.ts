@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { PrecoModel } from './preco.model';
+import { PrecoModel } from '../models/preco.model';
 import { firstValueFrom } from 'rxjs';
 
 const BASE_URL = 'https://api.awsli.com.br';

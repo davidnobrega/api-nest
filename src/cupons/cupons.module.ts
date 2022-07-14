@@ -4,7 +4,7 @@ import { CuponsController } from './cupons.controller';
 import { CuponsService } from './cupons.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CuponsModel, CuponsSchema } from './cupom.model';
+import { CuponsModel, CuponsSchema } from '../models/cupom.model';
 
 @Module({
   imports: [
